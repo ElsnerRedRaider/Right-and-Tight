@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Right &amp; Tight Plumbing | Licensed Master Plumber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep: #0c2440;
+    --blue-deeper: #081a30;
+    --blue-panel: #16385c;
+    --blue-panel-2: #1c4269;
+    --blue-line: #3e6e96;
+    --blue-bright: #7ec8e3;
+    --white: #ffffff;
+    --ice: #c9d6e3;
+    --ice-dim: #93a9bd;
+    --brass: #c08a3e;
+    --brass-light: #e0b46e;
+    --font-head: 'Big Shoulders Display', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--blue-deep);
+    color: var(--white);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    background-image:
+      linear-gradient(var(--blue-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--blue-line) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 0%, rgba(126,200,227,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 30%, rgba(126,200,227,0.06), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  ul{ list-style: none; }
+  img,svg{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow-tag{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--blue-bright);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8,26,48,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--blue-line);
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 16px 28px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+
+  .brand-mark{ width:40px; height:40px; flex-shrink:0; }
+
+  .brand-name{
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .brand-name span{ color: var(--blue-bright); }
+
+  .brand-sub{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ice-dim);
+    letter-spacing: 0.03em;
+    margin-top: 2px;
+  }
+
+  nav.links{
+    display:flex;
+    align-items:center;
+    gap: 32px;
+  }
+
+  nav.links a{
+    font-size: 15px;
+    color: var(--ice);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  nav.links a:hover{ color: var(--white); border-color: var(--blue-bright); }
+
+  .call-btn{
+    background: var(--brass);
+    color: var(--blue-deeper);
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 10px 18px;
+    border-radius: 3px;
+    border: 1px solid var(--brass-light);
+    transition: background .15s ease, transform .15s ease;
+    white-space: nowrap;
+  }
+  .call-btn:hover{ background: var(--brass-light); transform: translateY(-1px); }
+
+  .menu-btn{ display:none; background:none; border:none; color:var(--white); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 96px 0 84px;
+    position: relative;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 22px;
+  }
+  .hero-eyebrow .dash{ width:28px; height:1px; background: var(--blue-bright); }
+
+  .hero h1{
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(52px, 8vw, 92px);
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+  }
+  .hero h1 .amp{ color: var(--blue-bright); }
+
+  .hero-sub{
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 18px;
+    color: var(--ice);
+  }
+
+  .hero-mnemonic{
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ice-dim);
+    border-left: 2px solid var(--blue-line);
+    padding-left: 12px;
+  }
+
+  .hero-ctas{
+    margin-top: 34px;
+    display:flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary{
+    background: var(--brass);
+    color: var(--blue-deeper);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: 3px;
+    border: 1px solid var(--brass-light);
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn-primary:hover{ background: var(--brass-light); transform: translateY(-1px); }
+
+  .btn-outline{
+    background: transparent;
+    color: var(--white);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: 3px;
+    border: 1px solid var(--blue-line);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .btn-outline:hover{ border-color: var(--blue-bright); background: rgba(126,200,227,0.07); }
+
+  /* Dimension-line diagram */
+  .diagram{
+    position: relative;
+    padding: 34px 26px;
+    border: 1px solid var(--blue-line);
+    background: rgba(22,56,92,0.35);
+    border-radius: 2px;
+  }
+  .diagram-title{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue-bright);
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+  }
+  .dim-row{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(62,110,150,0.5);
+  }
+  .dim-row:first-of-type{ border-top:none; }
+  .dim-num{
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--white);
+    min-width: 92px;
+  }
+  .dim-label{
+    font-size: 13.5px;
+    color: var(--ice);
+    line-height: 1.35;
+  }
+  .dim-label b{ color: var(--white); display:block; font-weight:600; }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 88px 0; position: relative; }
+
+  .section-head{
+    display:flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .section-head h2{
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(34px, 4.5vw, 52px);
+    line-height: 1;
+  }
+
+  .section-num{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--blue-bright);
+  }
+
+  .divider{
+    height:1px;
+    background: linear-gradient(90deg, var(--blue-line), transparent);
+    margin: 0 0 88px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-grid p{
+    color: var(--ice);
+    font-size: 16.5px;
+    margin-bottom: 18px;
+    max-width: 54ch;
+  }
+
+  .about-grid p:first-of-type{
+    color: var(--white);
+    font-size: 19px;
+  }
+
+  .credential-plaque{
+    border: 1px solid var(--blue-line);
+    background: rgba(22,56,92,0.35);
+    padding: 28px;
+    border-radius: 2px;
+  }
+  .credential-plaque .plaque-icon{ width:44px; height:44px; color: var(--blue-bright); margin-bottom:16px; }
+  .credential-plaque h3{
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight:700;
+    margin-bottom: 14px;
+  }
+  .cred-list li{
+    font-size: 14px;
+    color: var(--ice);
+    padding: 9px 0;
+    border-top: 1px solid rgba(62,110,150,0.45);
+    display:flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .cred-list li:first-child{ border-top:none; }
+  .cred-list li span:last-child{ color: var(--blue-bright); font-family: var(--font-mono); font-size:12.5px; }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--blue-line);
+    border: 1px solid var(--blue-line);
+  }
+
+  .service-card{
+    background: var(--blue-deep);
+    padding: 32px 26px;
+    transition: background .18s ease;
+  }
+  .service-card:hover{ background: var(--blue-panel); }
+
+  .service-icon{ width:38px; height:38px; color: var(--blue-bright); margin-bottom: 20px; }
+
+  .service-card h3{
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 21px;
+    margin-bottom: 10px;
+  }
+  .service-card p{ font-size: 14px; color: var(--ice-dim); line-height:1.5; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 1px;
+    background: var(--blue-line);
+    border: 1px solid var(--blue-line);
+  }
+
+  .ticket{
+    background: var(--blue-panel);
+    padding: 40px 34px;
+  }
+  .ticket-head{
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    border-bottom: 1px dashed var(--blue-line);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  .ticket-head h3{
+    font-family: var(--font-head);
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .ticket-id{ font-family: var(--font-mono); font-size:11px; color: var(--blue-bright); text-align:right; }
+
+  .ticket-row{ margin-bottom: 20px; }
+  .ticket-row .k{ font-family: var(--font-mono); font-size: 11px; color: var(--ice-dim); letter-spacing:0.03em; margin-bottom:4px; }
+  .ticket-row .v{ font-size: 16px; color: var(--white); }
+  .ticket-row .v a:hover{ color: var(--blue-bright); }
+
+  .ticket-note{
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--blue-line);
+    font-size: 13px;
+    color: var(--ice-dim);
+    line-height: 1.6;
+  }
+
+  .form-panel{
+    background: var(--blue-deep);
+    padding: 40px 34px;
+  }
+
+  .form-panel h3{
+    font-family: var(--font-head);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .form-panel .lead{ color: var(--ice-dim); font-size: 14.5px; margin-bottom: 28px; }
+
+  .field-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  .field{ margin-bottom: 20px; }
+  .field label{
+    display:block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue-bright);
+    letter-spacing: 0.03em;
+    margin-bottom: 7px;
+  }
+  .field input, .field textarea{
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--blue-line);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 9px 2px;
+    transition: border-color .15s ease;
+  }
+  .field input:focus, .field textarea:focus{
+    outline: none;
+    border-color: var(--blue-bright);
+  }
+  .field input::placeholder, .field textarea::placeholder{ color: var(--ice-dim); opacity:0.6; }
+  .field textarea{ resize: vertical; min-height: 90px; font-family: var(--font-body); }
+
+  .submit-btn{
+    background: var(--brass);
+    color: var(--blue-deeper);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 30px;
+    border-radius: 3px;
+    border: 1px solid var(--brass-light);
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+    margin-top: 6px;
+  }
+  .submit-btn:hover{ background: var(--brass-light); transform: translateY(-1px); }
+
+  .form-success{
+    display:none;
+    margin-top: 20px;
+    padding: 14px 16px;
+    border: 1px solid var(--blue-bright);
+    background: rgba(126,200,227,0.08);
+    font-size: 14px;
+    color: var(--blue-bright);
+  }
+  .form-success.show{ display:block; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--blue-line);
+    padding: 36px 0;
+  }
+  .footer-row{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .footer-row p{ font-size: 13px; color: var(--ice-dim); }
+  .footer-row .brand-name{ font-size: 18px; }
+
+  /* ---------- Motion ---------- */
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1, .hero-sub, .hero-mnemonic, .hero-ctas, .diagram{
+      animation: rise .7s ease both;
+    }
+    .hero-sub{ animation-delay: .08s; }
+    .hero-mnemonic{ animation-delay: .14s; }
+    .hero-ctas{ animation-delay: .2s; }
+    .diagram{ animation-delay: .26s; }
+  }
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px){
+    nav.links{ display:none; }
+    .menu-btn{ display:block; }
+    .hero-grid, .about-grid{ grid-template-columns: 1fr; }
+    .diagram{ order: -1; }
+    .services-grid{ grid-template-columns: 1fr 1fr; }
+    .contact-grid{ grid-template-columns: 1fr; }
+    .field-row{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px){
+    .services-grid{ grid-template-columns: 1fr; }
+    .nav{ padding: 14px 18px; }
+    .wrap{ padding: 0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue-bright)">
+        <circle cx="24" cy="24" r="21" stroke="var(--blue-line)"/>
+        <path d="M14 30 L22 22" />
+        <path d="M20 16 a4 4 0 1 1 5.657 5.657 L15 32 l-3 3 -2-2 3-3 10.657-10.657 A4 4 0 0 1 20 16z" />
+        <path d="M27 27 q6 -2 9 3" stroke="var(--brass)"/>
+        <circle cx="34" cy="16" r="2.4" stroke="var(--brass)"/>
+      </svg>
+      <div>
+        <div class="brand-name">RIGHT <span>&amp;</span> TIGHT</div>
+        <div class="brand-sub">PLUMBING &nbsp;·&nbsp; LIC #PL-000000</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#about">About Us</a>
+      <a href="#services">Services We Provide</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <a class="call-btn" href="tel:+14694563771">Call (469) 456-3771</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="dash"></span>
+          <span class="eyebrow-tag">Residential &amp; Commercial Plumbing</span>
+        </div>
+        <h1>RIGHT<span class="amp">&amp;</span>TIGHT</h1>
+        <p class="hero-sub">Every fitting, joint, and valve — set the way it should be, the first time. Owner-operated by a licensed master plumber with two decades of hands-on work in this community.</p>
+        <p class="hero-mnemonic">RIGHTY-TIGHTY, LEFTY-LOOSEY — it's the oldest rule in the trade. It's also the standard we hold every job to.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="tel:+14694563771">Call for a Free Estimate</a>
+          <a class="btn-outline" href="#contact">Request Service</a>
+        </div>
+      </div>
+
+      <div class="diagram">
+        <div class="diagram-title">FIELD SPECIFICATIONS</div>
+        <div class="dim-row">
+          <div class="dim-num">20+</div>
+          <div class="dim-label"><b>Years in the trade</b>Full-time plumbing since day one — no subcontracted crews.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-num">24/7</div>
+          <div class="dim-label"><b>Emergency availability</b>Burst pipe or backed-up line, someone picks up.</div>
+        </div>
+        <div class="dim-row">
+          <div class="dim-num">100%</div>
+          <div class="dim-label"><b>Licensed &amp; insured</b>Master plumber license, bonded for every job we take.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About Us</h2>
+        <span class="section-num">01 / GENERAL</span>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Right &amp; Tight Plumbing was built on one idea: do the job correctly the first time, so nobody has to think about their pipes again.</p>
+          <p>Our owner, Jerry Hunt, has spent more than 20 years working on residential and commercial systems in and around Dallas-Fort Worth — from single-fixture repairs to full home and commercial repipes. Every job still gets a hands-on visit from a licensed master plumber, not a rotating crew.</p>
+          <p>We show up on time, explain what we find in plain language before any work starts, and stand behind every fitting we tighten. That's the whole business plan.</p>
+        </div>
+        <div class="credential-plaque">
+          <svg class="plaque-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="6" y="6" width="36" height="36" rx="1"/>
+            <path d="M14 24h20M24 14v20" stroke-opacity="0.5"/>
+            <circle cx="24" cy="24" r="9"/>
+            <path d="M20 24l3 3 6-6"/>
+          </svg>
+          <h3>Credentials</h3>
+          <ul class="cred-list">
+            <li><span>Master Plumber License</span><span>#PL-000000</span></li>
+            <li><span>Years of Experience</span><span>20+</span></li>
+            <li><span>Bonded &amp; Insured</span><span>YES</span></li>
+            <li><span>Service Area</span><span>Dallas-Fort Worth, TX</span></li>
+            <li><span>Emergency Calls</span><span>24/7</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Services We Provide</h2>
+        <span class="section-num">02 / SCOPE OF WORK</span>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="services-grid">
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 30 L26 18" />
+            <path d="M22 12 a4 4 0 1 1 5.657 5.657 L13 32 l-3 3 -2-2 3-3 8.657-8.657"/>
+            <circle cx="32" cy="10" r="2"/>
+          </svg>
+          <h3>Leak Detection &amp; Repair</h3>
+          <p>Pinpointing hidden leaks before they become water damage, then fixing the source — not just the symptom.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6 C24 6 15 18 15 26 a9 9 0 0 0 18 0 C33 18 24 6 24 6z"/>
+            <path d="M24 22 C24 22 20 27 20 30 a4 4 0 0 0 8 0 C28 27 24 22 24 22z"/>
+          </svg>
+          <h3>Drain &amp; Sewer Cleaning</h3>
+          <p>Clearing slow and blocked lines with proper equipment — camera inspection available on request.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="14" y="10" width="20" height="30" rx="3"/>
+            <path d="M14 20h20M19 6v4M29 6v4"/>
+            <path d="M20 28h8"/>
+          </svg>
+          <h3>Water Heater Install &amp; Repair</h3>
+          <p>Tank and tankless systems — replacement, repair, and routine maintenance to keep hot water running.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 24h10 M30 24h10"/>
+            <circle cx="24" cy="24" r="6"/>
+            <path d="M20 20l8 8M28 20l-8 8" stroke-opacity="0.5"/>
+          </svg>
+          <h3>Repiping &amp; Pipe Replacement</h3>
+          <p>Replacing aging or corroded supply lines with modern materials built to last decades, not years.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 30 V16 a8 8 0 0 1 16 0"/>
+            <rect x="12" y="30" width="24" height="8" rx="1"/>
+            <circle cx="16" cy="16" r="1.6" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>Fixture &amp; Faucet Installation</h3>
+          <p>Sinks, faucets, toilets, and fittings installed clean and level, with every connection checked twice.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="16"/>
+            <path d="M24 14v10l7 5"/>
+          </svg>
+          <h3>24/7 Emergency Service</h3>
+          <p>Burst pipes and major backups don't wait for business hours — neither do we.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Contact Us</h2>
+        <span class="section-num">03 / SERVICE REQUEST</span>
+      </div>
+      <div class="contact-grid">
+
+        <div class="ticket">
+          <div class="ticket-head">
+            <h3>Get in touch</h3>
+            <div class="ticket-id">FORM<br>NO. 0142</div>
+          </div>
+
+          <div class="ticket-row">
+            <div class="k">PHONE</div>
+            <div class="v"><a href="tel:+14694563771">(469) 456-3771</a></div>
+          </div>
+          <div class="ticket-row">
+            <div class="k">EMAIL</div>
+            <div class="v"><a href="mailto:rightandtightservices@gmail.com">rightandtightservices@gmail.com</a></div>
+          </div>
+          <div class="ticket-row">
+            <div class="k">SERVICE AREA</div>
+            <div class="v">Dallas-Fort Worth, TX &amp; surrounding areas</div>
+          </div>
+          <div class="ticket-row">
+            <div class="k">HOURS</div>
+            <div class="v">Mon–Sat, 7am–6pm · Emergency line 24/7</div>
+          </div>
+
+          <div class="ticket-note">
+            Fill out the form and we'll call you back, usually same day. For an active emergency — active flooding, no water, gas smell — call the line directly instead of submitting the form.
+          </div>
+        </div>
+
+        <div class="form-panel">
+          <h3>Request service</h3>
+          <p class="lead">Tell us what's going on and the best way to reach you.</p>
+
+          <form id="contactForm">
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+            </div>
+            <div class="field">
+              <label for="message">What do you need help with?</label>
+              <textarea id="message" name="message" placeholder="Describe the issue — leaking pipe, water heater, new install, etc." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Request</button>
+            <div class="form-success" id="formSuccess">Thanks — your request has been noted. We'll call you back shortly.</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="brand-name">RIGHT &amp; TIGHT PLUMBING</div>
+    <p>© <span id="year"></span> Right &amp; Tight Plumbing. Licensed Master Plumber #PL-000000.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    success.classList.add('show');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
