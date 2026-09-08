@@ -808,6 +808,7 @@
 
           <form id="contactForm">
             <input type="hidden" name="_subject" value="New service request — Right &amp; Tight Plumbing website">
+            <input type="hidden" name="_captcha" value="false">
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="field-row">
               <div class="field">
@@ -862,7 +863,10 @@
       headers: { "Accept": "application/json" },
       body: new FormData(form)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("FormSubmit error " + res.status);
+      return res.json();
+    })
     .then(() => {
       success.textContent = "Thanks — your request has been noted. We'll call you back shortly.";
       success.classList.add('show');
