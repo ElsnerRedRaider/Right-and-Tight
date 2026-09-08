@@ -259,6 +259,73 @@
   }
   .dim-label b{ color: var(--white); display:block; font-weight:600; }
 
+  /* ---------- Photo band ---------- */
+  .photo-band{
+    position: relative;
+    height: 360px;
+    overflow: hidden;
+  }
+  .photo-band-img{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(12,36,64,0.35), rgba(12,36,64,0.72) 75%, rgba(12,36,64,0.92)),
+      linear-gradient(90deg, rgba(12,36,64,0.55), rgba(12,36,64,0.1) 40%),
+      url('https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?fm=jpg&q=80&w=2400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 30%;
+    filter: grayscale(0.35) contrast(1.08) brightness(0.95);
+  }
+  .photo-band-content{
+    position: relative;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 34px;
+  }
+  .photo-band-content p{
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: clamp(22px, 3vw, 32px);
+    max-width: 20ch;
+  }
+  .photo-band-content span{
+    display:block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--blue-bright);
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .about-photo{
+    position: relative;
+    margin-bottom: 20px;
+    border: 1px solid var(--blue-line);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .about-photo img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.05) brightness(0.85);
+    mix-blend-mode: luminosity;
+  }
+  .about-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(160deg, rgba(28,66,105,0.55), rgba(14,42,71,0.25));
+  }
+  .about-photo-cap{
+    position:absolute; bottom:10px; left:12px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--white);
+    letter-spacing: 0.03em;
+    z-index: 2;
+  }
+
   /* ---------- Section shell ---------- */
   section{ padding: 88px 0; position: relative; }
 
@@ -458,6 +525,7 @@
     margin-top: 6px;
   }
   .submit-btn:hover{ background: var(--brass-light); transform: translateY(-1px); }
+  .submit-btn:disabled{ opacity: 0.6; cursor: not-allowed; }
 
   .form-success{
     display:none;
@@ -578,7 +646,15 @@
     </div>
   </section>
 
-  <div class="wrap"><div class="divider"></div></div>
+  <section class="photo-band">
+    <div class="photo-band-img"></div>
+    <div class="wrap photo-band-content">
+      <p>Every joint checked. Every connection tightened. Every time.</p>
+      <span>ON-SITE &nbsp;·&nbsp; DALLAS-FORT WORTH, TX</span>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider" style="margin-top:88px;"></div></div>
 
   <section id="about">
     <div class="wrap">
@@ -591,6 +667,11 @@
           <p>Right &amp; Tight Plumbing was built on one idea: do the job correctly the first time, so nobody has to think about their pipes again.</p>
           <p>Our owner, Jerry Hunt, has spent more than 20 years working on residential and commercial systems in and around Dallas-Fort Worth — from single-fixture repairs to full home and commercial repipes. Every job still gets a hands-on visit from a licensed master plumber, not a rotating crew.</p>
           <p>We show up on time, explain what we find in plain language before any work starts, and stand behind every fitting we tighten. That's the whole business plan.</p>
+        </div>
+        <div>
+        <div class="about-photo">
+          <img src="https://images.unsplash.com/photo-1503789146722-cf137a3c0fea?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Plumbing tools of the trade">
+          <span class="about-photo-cap">TOOLS OF THE TRADE</span>
         </div>
         <div class="credential-plaque">
           <svg class="plaque-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -607,6 +688,7 @@
             <li><span>Service Area</span><span>Dallas-Fort Worth, TX</span></li>
             <li><span>Emergency Calls</span><span>24/7</span></li>
           </ul>
+        </div>
         </div>
       </div>
     </div>
@@ -725,6 +807,8 @@
           <p class="lead">Tell us what's going on and the best way to reach you.</p>
 
           <form id="contactForm">
+            <input type="hidden" name="_subject" value="New service request — Right &amp; Tight Plumbing website">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div class="field-row">
               <div class="field">
                 <label for="name">Full name</label>
@@ -765,10 +849,33 @@
 
   const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
+  const FORM_TARGET_EMAIL = "rightandtightservices@gmail.com";
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    success.classList.add('show');
-    form.reset();
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    fetch("https://formsubmit.co/ajax/" + FORM_TARGET_EMAIL, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    })
+    .then(res => res.json())
+    .then(() => {
+      success.textContent = "Thanks — your request has been noted. We'll call you back shortly.";
+      success.classList.add('show');
+      form.reset();
+    })
+    .catch(() => {
+      success.textContent = "Something went wrong sending that — please call or email us directly.";
+      success.classList.add('show');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Request";
+    });
   });
 </script>
 
